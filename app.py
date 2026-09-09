@@ -18,7 +18,6 @@ def analyze_route():
     resume_text = request.form.get("resume_text", "")
     resume_file = request.files.get("resume_file")
 
-    # If a file was uploaded
     if resume_file and resume_file.filename:
 
         resume_text = extract_text_from_file(
@@ -26,14 +25,11 @@ def analyze_route():
             resume_file.filename
         )
 
-    # Check CV
     if not resume_text.strip():
         return "Please upload a CV or paste your CV text."
 
-    # Analyze
     result = analyze(resume_text, job)
 
-    # Save result
     save_analysis(
         result["score"],
         result["matched"],
@@ -52,7 +48,6 @@ def history():
 
     analyses = get_analyses()
 
-    # Simple stats shown at the bottom of the history page
     total = len(analyses)
 
     if total > 0:

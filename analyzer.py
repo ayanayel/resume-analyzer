@@ -36,7 +36,6 @@ def analyze(cv, job):
     cv_skills = []
     job_skills = []
 
-    # Find skills in CV and Job
     for skill in skills:
 
         if skill in cv:
@@ -45,7 +44,6 @@ def analyze(cv, job):
         if skill in job:
             job_skills.append(skill)
 
-    # Matching skills
     matched = []
 
     for skill in job_skills:
@@ -53,7 +51,6 @@ def analyze(cv, job):
         if skill in cv_skills:
             matched.append(skill)
 
-    # Missing skills
     missing = []
 
     for skill in job_skills:
@@ -61,13 +58,11 @@ def analyze(cv, job):
         if skill not in cv_skills:
             missing.append(skill)
 
-    # Score
     if len(job_skills) > 0:
         score = len(matched) / len(job_skills) * 100
     else:
         score = 0
 
-    # Weaknesses
     weaknesses = []
 
     if len(missing) > 0:
@@ -100,7 +95,6 @@ def analyze(cv, job):
             "Your CV contains limited information."
         )
 
-    # Recommendations
     recommendations = []
 
     if missing:
@@ -138,16 +132,11 @@ def analyze(cv, job):
             "Your CV looks good. Try adding measurable achievements."
         )
 
-    # Section scores — each one is calculated from the CV itself,
-    # not a fixed/placeholder number.
 
     sections = {}
 
-    # Skills: the same percentage as the overall match score
     sections["skills"] = round(score)
 
-    # Experience / Education / Projects: 100 if we found the section
-    # heading in the CV, 0 if we did not.
     sections["experience"] = 100 if "experience" in cv else 0
     sections["education"] = 100 if "education" in cv else 0
     sections["projects"] = 100 if "project" in cv else 0

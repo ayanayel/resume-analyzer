@@ -9,13 +9,11 @@ def extract_text_from_file(file, filename):
 
     data = file.read()
 
-    # TXT
     if extension == "txt":
 
         return data.decode("utf-8", errors="ignore")
 
 
-    # PDF
     elif extension == "pdf":
 
         pdf = PyPDF2.PdfReader(
@@ -30,7 +28,6 @@ def extract_text_from_file(file, filename):
         return text
 
 
-    # DOCX
     elif extension == "docx":
 
         document = docx.Document(
