@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block title %}ResumeAI — Analyzer{% endblock %}
+
+{% block content %}
+
+<main class="page">
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="badge">
+            AI-POWERED · NLP ANALYSIS
+        </div>
+
+        <h1>
+            Your resume,<br>
+            <span>ruthlessly improved.</span>
+        </h1>
+
+        <p>
+            Paste your resume and a job description.
+            Our NLP engine identifies gaps, scores each
+            section, and gives you a prioritized action plan.
+        </p>
+
+    </section>
+
+
+    <!-- FORM: submits to the real analyze_route -->
+
+    <form action="{{ url_for('analyze_route') }}"
+          method="post"
+          enctype="multipart/form-data">
+
+
+        <!-- INPUT AREA -->
+
+        <section class="input-grid">
+
+
+            <!-- RESUME -->
+
+            <div class="input-column">
+
+                <div class="section-label">
+                    01 — RESUME / CV
+                </div>
+
+
+                <div class="upload-area">
+
+                    <div class="file-icon">
+                        📄
+                    </div>
+
+                    <div class="upload-title">
+                        Drop your resume here
+                    </div>
+
+                    <div class="upload-subtitle">
+                        PDF, DOCX, or TXT · up to 5MB
+                    </div>
+
+
+                    <label class="browse-button">
+
+                        Browse files
+
+                        <input
+                            type="file"
+                            name="resume_file"
+                            id="resume_file"
+                            accept=".pdf,.doc,.docx,.txt"
+                        >
+
+                    </label>
+
+                </div>
+
+
+                <div class="or">
+                    OR PASTE IT
+                </div>
+
+
+                <textarea
+                    class="resume-text"
+                    name="resume_text"
+                    id="resume_text"
+                    placeholder="Paste your resume text here..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- JOB -->
+
+            <div class="input-column">
+
+                <div class="section-label">
+                    02 — JOB DESCRIPTION
+                </div>
+
+
+                <textarea
+                    class="job-text"
+                    name="job_description"
+                    id="job_description"
+                    placeholder="Paste the full job description here — requirements, responsibilities, and qualifications..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- BUTTON -->
+
+        <div class="analyze-container">
+
+            <button type="submit" class="analyze-button">
+
+                <span>⚡</span>
+
+                Analyze Resume
+
+            </button>
+
+        </div>
+
+    </form>
+
+
+    <!-- HOW IT WORKS -->
+
+    <section class="how-it-works">
+
+        <div class="section-label">
+            HOW IT WORKS
+        </div>
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+                <div class="step-top">
+
+                    <span class="step-icon">
+                        🔍
+                    </span>
+
+                    <span class="step-number">
+                        01
+                    </span>
+
+                </div>
+
+                <h3>
+                    NLP Parsing
+                </h3>
+
+                <p>
+                    Extracts skills, experience, education,
+                    and projects from your resume.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-top">
+
+                    <span class="step-icon">
+                        ⚖️
+                    </span>
+
+                    <span class="step-number">
+                        02
+                    </span>
+
+                </div>
+
+                <h3>
+                    JD Matching
+                </h3>
+
+                <p>
+                    Compares your profile against the job
+                    description keyword by keyword.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-top">
+
+                    <span class="step-icon">
+                        📊
+                    </span>
+
+                    <span class="step-number">
+                        03
+                    </span>
+
+                </div>
+
+                <h3>
+                    Section Scoring
+                </h3>
+
+                <p>
+                    Checks for key sections — experience,
+                    education, projects, and summary.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-top">
+
+                    <span class="step-icon">
+                        🎯
+                    </span>
+
+                    <span class="step-number">
+                        04
+                    </span>
+
+                </div>
+
+                <h3>
+                    Action Plan
+                </h3>
+
+                <p>
+                    Delivers prioritized, specific suggestions
+                    you can implement today.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+{% endblock %}

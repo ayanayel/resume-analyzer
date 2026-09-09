@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}ResumeAI — History{% endblock %}
+
+{% block content %}
+
+<main class="history-page">
+
+
+    <div class="history-header">
+
+        <div class="section-label">
+            ANALYSIS HISTORY
+        </div>
+
+        <h1>
+            Past Reports
+        </h1>
+
+        <p>
+            Track your resume performance across
+            different opportunities.
+        </p>
+
+    </div>
+
+
+    {% for a in analyses %}
+
+    <!-- a[0]=id  a[1]=score  a[2]=matched  a[3]=missing  a[4]=weaknesses -->
+
+    <div class="history-item">
+
+        <div>
+
+            <h3>
+                Analysis #{{ a[0] }}
+            </h3>
+
+            <p>
+                {{ a[2].split(', ')|length if a[2] else 0 }} matched ·
+                {{ a[3].split(', ')|length if a[3] else 0 }} missing
+            </p>
+
+        </div>
+
+
+        <div class="history-scores">
+
+            <div>
+                <small>
+                    Score
+                </small>
+
+                <strong class="{% if a[1] >= 70 %}good{% endif %}">
+                    {{ a[1] }}
+                </strong>
+            </div>
+
+
+            <form action="{{ url_for('delete', id=a[0]) }}" method="post">
+                <button type="submit" class="browse-button">
+                    Delete
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <p>
+        No analyses yet.
+        <a href="{{ url_for('home') }}">Run your first one</a>.
+    </p>
+
+    {% endfor %}
+
+
+    <!-- STATS -->
+
+    {% if total > 0 %}
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>{{ total }}</strong>
+            <span>Analyses run</span>
+        </div>
+
+        <div class="stat">
+            <strong>{{ avg_score }}</strong>
+            <span>Avg. score</span>
+        </div>
+
+        <div class="stat">
+            <strong>{{ best_score }}</strong>
+            <span>Best score</span>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+</main>
+
+{% endblock %}

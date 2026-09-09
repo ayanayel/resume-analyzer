@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}ResumeAI{% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                R
+            </div>
+
+            <span class="brand-name">
+                ResumeAI
+            </span>
+
+            <span class="brand-path">
+                / analyzer
+            </span>
+
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="{{ url_for('home') }}"
+               class="nav-button {% if request.endpoint == 'home' %}active{% endif %}">
+
+                ⚡ Analyze
+
+            </a>
+
+            <a href="{{ url_for('history') }}"
+               class="nav-button {% if request.endpoint == 'history' %}active{% endif %}">
+
+                📋 History
+
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+{% block content %}
+{% endblock %}
+
+
+<footer>
+
+    <span>
+        ResumeAI · NLP-powered analysis
+    </span>
+
+    <span>
+        Built with Flask + Python · v2.1.0
+    </span>
+
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

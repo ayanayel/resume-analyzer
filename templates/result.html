@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+
+{% block title %}ResumeAI — Results{% endblock %}
+
+{% block content %}
+
+<main class="results-page">
+
+
+    <!-- HEADER -->
+
+    <div class="results-header">
+
+
+        <div>
+
+            <a href="{{ url_for('home') }}"
+               class="back">
+
+                ← New analysis
+
+            </a>
+
+
+            <h1>
+                Analysis Result
+            </h1>
+
+            <p class="meta">
+                NLP-powered resume vs. job description comparison
+            </p>
+
+        </div>
+
+
+        <div class="scores">
+
+            <div class="score-box">
+
+                <div class="score-ring">
+
+                    <strong>
+                        {{ result.score }}
+                    </strong>
+
+                </div>
+
+                <span>
+                    Match Score
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- TABS -->
+
+    <div class="tabs">
+
+        <button class="tab active" data-tab="overview">
+            Overview
+        </button>
+
+        <button class="tab" data-tab="skills">
+            Skills Gap
+        </button>
+
+        <button class="tab" data-tab="actions">
+            Action Plan
+        </button>
+
+    </div>
+
+
+    <!-- OVERVIEW -->
+
+    <div id="overview" class="tab-content">
+
+        <div class="result-grid">
+
+
+            <section class="result-card">
+
+                <div class="card-label">
+                    MATCHED SKILLS
+                </div>
+
+
+                <ul class="result-list">
+
+                    {% for skill in result.matched %}
+                    <li>
+                        <span class="green">✓</span>
+                        {{ skill }}
+                    </li>
+                    {% else %}
+                    <li>
+                        No matching skills found yet.
+                    </li>
+                    {% endfor %}
+
+                </ul>
+
+            </section>
+
+
+            <section class="result-card">
+
+                <div class="card-label">
+                    WEAKNESSES
+                </div>
+
+
+                <ul class="result-list">
+
+                    {% for weakness in result.weaknesses %}
+                    <li>
+                        <span class="red">✗</span>
+                        {{ weakness }}
+                    </li>
+                    {% else %}
+                    <li>
+                        <span class="green">✓</span>
+                        No major weaknesses found.
+                    </li>
+                    {% endfor %}
+
+                </ul>
+
+            </section>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- SKILLS GAP -->
+
+    <div id="skills" class="tab-content" style="display:none">
+
+        <section class="result-card full">
+
+            <div class="card-label">
+                SKILLS GAP
+            </div>
+
+
+            <h3 class="sub-title">
+                Present Skills
+            </h3>
+
+
+            <div class="skills">
+
+                {% for skill in result.matched %}
+                <span class="skill present">
+                    ✓ {{ skill }}
+                </span>
+                {% else %}
+                <span class="skill missing">
+                    No skills detected in your resume.
+                </span>
+                {% endfor %}
+
+            </div>
+
+
+            <h3 class="sub-title missing-title">
+                Missing Skills
+            </h3>
+
+
+            <div class="skills">
+
+                {% for skill in result.missing %}
+                <span class="skill missing">
+                    ✗ {{ skill }}
+                </span>
+                {% else %}
+                <span class="skill present">
+                    ✓ Nothing missing — full coverage.
+                </span>
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- ACTION PLAN -->
+
+    <div id="actions" class="tab-content" style="display:none">
+
+        <section class="result-card full">
+
+            <div class="card-label">
+                ACTION PLAN
+            </div>
+
+
+            <div class="action-group">
+
+                {% for tip in result.recommendations %}
+                <p>
+                    <span>{{ "%02d"|format(loop.index) }}</span>
+                    {{ tip }}
+                </p>
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+</main>
+
+{% endblock %}
